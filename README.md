@@ -1,4 +1,4 @@
-# Standdard RobbingTicket System :: Mars
+# Standard RobbingTicket System :: Mars
 ![](https://img.shields.io/badge/require.js-build-brightgreen.svg)![](https://img.shields.io/badge/bootstrap-build-brightgreen.svg)![](https://img.shields.io/badge/fis3-integration-green.svg)![](https://img.shields.io/badge/Redis-Ready-brightgreen.svg)
 
 ![](./screenshots/logo.png)
