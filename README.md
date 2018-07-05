@@ -15,6 +15,7 @@ Mars抢票系统可用于各类活动的的票务发放，并在高并发上做�
 ## 目录
 
 - [背景](#%e8%83%8c%e6%99%af)
+- [后端项目目录及环境搭建](#后端项目目录及环境搭建)
 - [前端环境搭建](#%e5%89%8d%e7%ab%af%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba)
 - [数据库设计](#%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%be%e8%ae%a1)
 - [接口设计](#%e6%8e%a5%e5%8f%a3%e8%ae%be%e8%ae%a1)
@@ -45,14 +46,144 @@ Mars抢票系统可用于各类活动的的票务发放，并在高并发上做�
 
 ![](./screenshots/struct.jpg)
 
-后端：
+## 后端项目目录及环境搭建
+
+```
+.
+├── README.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   ├── META-INF
+    │   │   │   └── MANIFEST.MF
+    │   │   └── com
+    │   │       └── wizz
+    │   │           └── seckill
+    │   │               ├── Config
+    │   │               │   └── RedisConfiguration.java
+    │   │               ├── Controller
+    │   │               │   ├── AccountController.java
+    │   │               │   ├── UserTableController.java
+    │   │               │   └── seckillController.java
+    │   │               ├── Exception
+    │   │               │   ├── ObjectException.java
+    │   │               │   └── OwnExceptionHandler.java
+    │   │               ├── Mapper
+    │   │               │   ├── SysUserMapper.java
+    │   │               │   ├── actAttrMapper.java
+    │   │               │   ├── actInfoMapper.java
+    │   │               │   └── reqInfoMapper.java
+    │   │               ├── Model
+    │   │               │   ├── SysUser.java
+    │   │               │   ├── actAtr.java
+    │   │               │   ├── actInfo.java
+    │   │               │   ├── reqInfo.java
+    │   │               │   ├── reqRes.java
+    │   │               │   └── reqResWithToken.java
+    │   │               ├── SeckillApplication.java
+    │   │               ├── Service
+    │   │               │   ├── Impl
+    │   │               │   │   ├── RedisService.java
+    │   │               │   │   ├── SysUserServiceImpl.java
+    │   │               │   │   └── textService.java
+    │   │               │   ├── SysUserService.java
+    │   │               │   ├── TimerService.java
+    │   │               │   └── initTicketsService.java
+    │   │               └── Util
+    │   │                   ├── ip
+    │   │                   │   └── IpUtil.java
+    │   │                   └── jwt
+    │   │                       └── JwtToken.java
+    │   └── resources
+    │       ├── application.properties
+    │       └── sql
+    │           └── user.sql
+    └── test
+        └── java
+```
+
+环境搭建
+
+```shell
+##clone
+git clone https://github.com/Lyears/webHomework.git
+cd webHomework
+
+##maven package
+mvn package
+## start project
+java -jar seckill-0.0.1-SNAPSHOT.jar
+```
+
+
 
 ## 前端环境搭建
 
 ![](./screenshots/p2.png)
 
-
 ## 数据库设计
+
+- REQTBL表
+
+  ```
+  +----------+-------------+------+-----+-------------------+-------+
+  | Field    | Type        | Null | Key | Default           | Extra |
+  +----------+-------------+------+-----+-------------------+-------+
+  | STATE    | int(11)     | NO   |     | NULL              |       |
+  | PHONENUM | varchar(20) | NO   | PRI | NULL              |       |
+  | STUID    | varchar(20) | NO   |     | NULL              |       |
+  | STUNAME  | varchar(40) | NO   |     | NULL              |       |
+  | TIME     | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
+  +----------+-------------+------+-----+-------------------+-------+
+  ```
+
+- actattr表
+
+  ```
+  +-------------+--------------+------+-----+---------+--------------------------------+
+  | Field       | Type         | Null | Key | Default | Extra                          |
+  +-------------+--------------+------+-----+---------+--------------------------------+
+  | begtime     | timestamp(6) | NO   |     | NULL    | on update CURRENT_TIMESTAMP(6) |
+  | endtime     | timestamp(6) | NO   |     | NULL    | on update CURRENT_TIMESTAMP(6) |
+  | seckilltime | timestamp(6) | NO   |     | NULL    | on update CURRENT_TIMESTAMP(6) |
+  | tickets     | int(11)      | NO   |     | NULL    |                                |
+  | ownerid     | int(11)      | NO   |     | NULL    |                                |
+  | actid       | int(11)      | NO   | PRI | NULL    | auto_increment                 |
+  +-------------+--------------+------+-----+---------+--------------------------------+
+  ```
+
+- actinfo表
+
+  ```
+  +------------+--------------+------+-----+---------+----------------+
+  | Field      | Type         | Null | Key | Default | Extra          |
+  +------------+--------------+------+-----+---------+----------------+
+  | imgurl     | varchar(100) | YES  |     | NULL    |                |
+  | theme      | int(11)      | YES  |     | NULL    |                |
+  | name       | varchar(500) | YES  |     | NULL    |                |
+  | des        | varchar(500) | YES  |     | NULL    |                |
+  | textdetail | varchar(500) | YES  |     | NULL    |                |
+  | ownerid    | int(11)      | NO   |     | NULL    |                |
+  | actid      | int(11)      | NO   | PRI | NULL    | auto_increment |
+  +------------+--------------+------+-----+---------+----------------+
+  ```
+
+- user表
+
+  ```
+  +----------+--------------+------+-----+---------+----------------+
+  | Field    | Type         | Null | Key | Default | Extra          |
+  +----------+--------------+------+-----+---------+----------------+
+  | id       | int(11)      | NO   | PRI | NULL    | auto_increment |
+  | username | varchar(255) | YES  |     | NULL    |                |
+  | password | varchar(255) | YES  |     | NULL    |                |
+  +----------+--------------+------+-----+---------+----------------+
+  ```
+
+  
 
 ## 接口设计
 
