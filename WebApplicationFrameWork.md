@@ -8,7 +8,7 @@ MVC模式即Model-View-Controller模式，应用于应用程序的分层开发
 + View - 视图代表模型包含的数据的可视化
 + Controller - 控制器作用于模型和视图上。其控制数据流向模型对象，并在数据变化时更新视图，它使视图和模型分离。
 
-![MVC](/Users/saber/Documents/webHomework/screenshots/MVC.png)
+![MVC](https://raw.githubusercontent.com/ACERY1/webHomework/master/screenshots/MVC.png)
 
 本项目目录对应
 
