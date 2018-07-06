@@ -30,3 +30,20 @@ com
 
 + Model 置于com.wizz.seckill.Model下
 + 其余部分为Controller，不包含View
+
+
+
+## spring  boot 框架的使用
+
+![Spring Bootçç¥è¯ç¹](https://raw.githubusercontent.com/rootsongjc/kubernetes-handbook/master/images/spring-boot-note-spots.png)
+
+Features
+
+- Create stand-alone Spring applications
+- Embed Tomcat, Jetty or Undertow directly (no need to deploy WAR files)
+- Provide opinionated 'starter' dependencies to simplify your build configuration
+- Automatically configure Spring and 3rd party libraries whenever possible
+- Provide production-ready features such as metrics, health checks and externalized configuration
+- Absolutely no code generation and no requirement for XML configuration
+
+You can also [join the Spring Boot community on Gitter](https://gitter.im/spring-projects/spring-boot)!
