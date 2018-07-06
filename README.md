@@ -19,6 +19,7 @@ Mars抢票系统可用于各类活动的的票务发放，并在高并发上做�
 - [数据库设计](#%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%be%e8%ae%a1)
 - [接口设计](#%e6%8e%a5%e5%8f%a3%e8%ae%be%e8%ae%a1)
 - [前端效果展示](#%e5%89%8d%e7%ab%af%e6%95%88%e6%9e%9c%e5%b1%95%e7%a4%ba)
+- [web应用框架设计](https://github.com/ACERY1/webHomework/blob/master/WebApplicationFrameWork.md)
 - [Collaborators](#Collaborators)
 - [License](#license)
 
