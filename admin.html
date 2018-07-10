@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="/css/lib/reset.css">
+    <link rel="stylesheet" href="/css/lib/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lib/animate.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/lib/bootstrap-datetimepicker.min.css">
+    <title>抢票系统后台管理</title>
+    <!--styles-->
+    <link rel="stylesheet" href="/css/admin.css">
+    <script data-main="js/admin.js" src="js/lib/require.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin.html">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+            </a>
+            <a class="navbar-brand" href="./admin.html">活动管理</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" id="js-admin-name">登录</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!--登录-->
+<div id="js-admin-login" class="admin-login">
+    <div class="contaienr l-box__allMid slideInLeft animated">
+        <p class="t2-black__bold t2">抢票活动管理后台</p>
+        <div class="input-group">
+            <input id="js-input-username" class="input" type="text" placeholder="用户名">
+        </div>
+        <div class="input-group">
+            <input id="js-input-password" class="input" type="password" placeholder="密码">
+        </div>
+
+        <button id="js-btn-login" class="btn btn-info  btn-lg mt105">登录</button>
+    </div>
+</div>
+
+<!--主要内容-->
+<div id="js-admin-main" class="admin-main container">
+    <div class="row">
+        <div class="col-lg-12  l-box__rowMid mb1">
+            <button id="js-addAct" class="btn btn-info">新增活动</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="js-actTable" class="table table-bordered">
+                <tr>
+                    <td>活动名称</td>
+                    <td>活动时间</td>
+                    <td>放票数量</td>
+                    <td>活动链接</td>
+                    <td>操作</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--活动弹窗-->
+<div id="js-modal-addAct" class="modal-addAct">
+    <div class="input-group">
+        <span class="input-group-addon">活动名称</span>
+        <input id="act-name" type="text" class="form-control" placeholder="请输入活动名称">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动描述</span>
+        <input id="act-desc" type="text" class="form-control" placeholder="请输入活动描述">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动开始日期</span>
+        <input id="act-startDate"  type="date" class="form-control" placeholder="请选择活动开始日期">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动开始时间</span>
+        <input id="act-startTime" type="time" class="form-control" placeholder="请输入活动开始时间">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动结束日期</span>
+        <input id="act-endDate" type="date" class="form-control" placeholder="请输入活动结束日期">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动结束时间</span>
+        <input id="act-endTime" type="time" class="form-control" placeholder="请输入活动结束时间">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">抢票开始日期</span>
+        <input id="rush-startDate" type="date" class="form-control" placeholder="请输入抢票开始日期">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">抢票开始时间</span>
+        <input id="rush-startTime" type="time" class="form-control" placeholder="请输入抢票开始时间">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动背景图URL</span>
+        <input id="act-bgURL" type="text" class="form-control" placeholder="请输入活动背景图URL">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">发票数</span>
+        <input id="act-tickets" type="number" class="form-control" placeholder="请输入发票数" maxlength="5">
+    </div>
+    <h4 class="mg20">短信配置</h4>
+    <!--<textarea id="act-message" class="form-control message" rows="3" style="resize: none" maxlength="140" placeholder="#{姓名}不要改动，{时间}和{地点}替换成相应的领票时间和地点">【西电学生会】#{姓名}同学， 恭喜您抢票成功，请于{时间}到{地点}领取您的门票。</textarea>-->
+    <textarea id="act-message" class="form-control message" rows="3" style="resize: none" maxlength="140" placeholder="请一定要确保短信模板正确（精确到标点），不然无法发送短信"></textarea>
+    <div class="input-group">
+        <span class="input-group-addon">主题</span>
+        <input id="act-theme" type="number" class="form-control" placeholder="请输入0或1，0代表亮色，1代表暗色">
+    </div>
+</div>
+
+<!--详情弹窗-->
+<div id="js-modal-showAct" class="modal-addAct">
+    <div class="input-group">
+        <span class="input-group-addon">活动名称</span>
+        <input id="js-act-name" type="text" class="form-control" placeholder="请输入活动名称" disabled>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动描述</span>
+        <input id="js-act-desc" type="text" class="form-control" placeholder="请输入活动描述" disabled>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动开始时间</span>
+        <input id="js-act-startTime" type="text" class="form-control" placeholder="请输入活动开始时间" disabled>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动结束时间</span>
+        <input id="js-act-endTime" type="text" class="form-control" placeholder="请输入活动结束时间" disabled>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">抢票开始时间</span>
+        <input id="js-rush-startTime" type="text" class="form-control" placeholder="请输入抢票开始时间" disabled>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">活动背景图URL</span>
+        <input id="js-act-bgURL" type="text" class="form-control" placeholder="请输入活动背景图URL" disabled>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">发票数</span>
+        <input id="js-act-tickets" type="number" class="form-control" placeholder="请输入发票数" maxlength="5" disabled>
+    </div>
+    <h4 class="mg20">短信配置</h4>
+    <textarea id="js-act-message" class="form-control message" rows="3" style="resize: none" maxlength="140" disabled></textarea>
+    <div class="input-group">
+        <span class="input-group-addon">主题</span>
+        <input id="js-act-theme" type="number" class="form-control" placeholder="请输入0或1，0代表亮色，1代表暗色" disabled>
+    </div>
+</div>
+
+<div class="loader-wrapper" id="js-loader">
+    <div class="loader">
+        <div class="roller"></div>
+        <div class="roller"></div>
+    </div>
+
+    <div id="loader2" class="loader">
+        <div class="roller"></div>
+        <div class="roller"></div>
+    </div>
+
+    <div id="loader3" class="loader">
+        <div class="roller"></div>
+        <div class="roller"></div>
+    </div>
+
+    <button class="btn  freshBtn bounceInUp animated">RELOAD</button>
+</div>
+
+<div id="js-modal-excel">
+    <a  id="js-excel"  href="" download="抢票活动导出数据.txt">下载链接在这里</a>
+</div>
+
+<!--<script src="js/lib/jquery.js"></script>-->
+<!--<script src="js/lib/bootstrap.js"></script>-->
+</body>
+</html>
